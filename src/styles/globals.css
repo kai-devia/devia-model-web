@@ -275,7 +275,8 @@ footer p {
   }
 
   /* Ocultar scroll hint */
-  .scroll-hint {
+  .scroll-hint,
+  .hero-scroll-hint {
     display: none !important;
   }
 }
