@@ -33,7 +33,7 @@ const cards = [
   {
     icon: <IconUsers />,
     title: 'Cultura y forma de trabajar del equipo',
-    description: 'El agente no es genérico, es tuyo. Trabaja exactamente como trabaja tu equipo — con su ritmo, su estilo y sus prioridades.',
+    description: 'El agente no es genérico, es tuyo. Trabaja exactamente como trabaja tu equipo: con su ritmo, su estilo y sus prioridades.',
   },
   {
     icon: <IconBolt />,

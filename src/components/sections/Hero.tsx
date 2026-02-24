@@ -38,7 +38,7 @@ export function Hero() {
         >
           Devia redefine cómo se construyen equipos técnicos. Perfiles de IA especializados,
           coordinados por un Tech Lead humano, que trabajan con la calidad y disciplina de un senior
-          — a una fracción del coste y tiempo tradicional.
+          A una fracción del coste y tiempo tradicional.
         </motion.p>
         <motion.div
           className="hero-actions"

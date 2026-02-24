@@ -48,9 +48,9 @@ export function NuevoSenior() {
           delay={0.08}
         />
         <BlueBanner delay={0.24}>
-          <strong>El Tech Lead como arquitecto de equipos —</strong>
+          <strong>El Tech Lead como arquitecto de equipos.</strong>
           {' '}El senior que trabaja con Devia tiene por primera vez un equipo totalmente alineado con su forma de trabajar,
-          que no olvida nada, que no se va, y que ejecuta exactamente según su criterio — escalando su impacto de forma ilimitada.
+          que no olvida nada, que no se va, y que ejecuta exactamente según su criterio, escalando su impacto de forma ilimitada.
         </BlueBanner>
       </div>
     </section>

@@ -18,7 +18,7 @@ const cards = [
   {
     icon: <IconClock />,
     title: 'Onboarding lento',
-    description: 'Un nuevo desarrollador tarda semanas o meses en ser productivo. El tiempo invertido en contexto no se recupera — y se pierde si esa persona se va.',
+    description: 'Un nuevo desarrollador tarda semanas o meses en ser productivo. El tiempo invertido en contexto no se recupera, y se pierde si esa persona se va.',
   },
   {
     icon: <IconDatabase />,
@@ -49,7 +49,7 @@ export function Problema() {
         <SectionHeader
           label="El contexto"
           title="El modelo de equipo tradicional tiene grietas"
-          subtitle="Los equipos técnicos actuales enfrentan problemas estructurales que no son coyunturales — son consecuencia del propio modelo."
+          subtitle="Los equipos técnicos actuales enfrentan problemas estructurales que no son coyunturales, son consecuencia del propio modelo."
         />
         <div className="cards-grid cols-2">
           {cards.map((card, i) => (

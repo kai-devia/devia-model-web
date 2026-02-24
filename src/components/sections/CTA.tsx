@@ -6,9 +6,9 @@ const pdfPath = '/deviamodel/assets/devia-presentacion.pdf';
 
 const bullets = [
   'Un requisito de tu producto, procesado de principio a fin',
-  'Análisis, historias de usuario, código y PR — en una sola sesión',
+  'Análisis, historias de usuario, código y PR en una sola sesión',
   'El Tech Lead coordina, el equipo IA ejecuta: lo ves en directo',
-  'Sin preparación previa ni scripts — todo en tiempo real',
+  'Sin preparación previa ni scripts, todo en tiempo real',
 ];
 
 export function CTA() {

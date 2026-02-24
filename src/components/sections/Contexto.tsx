@@ -23,7 +23,7 @@ const cards = [
   {
     icon: <IconLock />,
     title: 'El experto que no se va con su renuncia',
-    description: 'Con Devia, ese conocimiento deja de ser personal — es del sistema. La organización nunca más pierde lo que sabe.',
+    description: 'Con Devia, ese conocimiento deja de ser personal: es del sistema. La organización nunca más pierde lo que sabe.',
   },
   {
     icon: <IconTrend />,
