@@ -1,6 +1,7 @@
 import './styles/globals.css';
 import './styles/components.css';
 
+import { useScrollReveal } from './hooks/useScrollReveal';
 import { Header } from './components/Header';
 import { NavDots } from './components/NavDots';
 import { Hero } from './components/sections/Hero';
@@ -39,6 +40,8 @@ function Footer() {
 }
 
 export default function App() {
+  useScrollReveal();
+
   return (
     <>
       <Header />
