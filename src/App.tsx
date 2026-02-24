@@ -1,7 +1,6 @@
 import './styles/globals.css';
 import './styles/components.css';
 
-import { useScrollReveal } from './hooks/useScrollReveal';
 import { useFullPageScroll } from './hooks/useFullPageScroll';
 import { Header } from './components/Header';
 import { NavDots } from './components/NavDots';
@@ -19,36 +18,25 @@ import { Propuesta } from './components/sections/Propuesta';
 import { Flujo } from './components/sections/Flujo';
 import { CTA } from './components/sections/CTA';
 
-function Footer() {
-  return (
-    <footer>
-      <div className="container">
-        <div className="logo">Dev<span className="ia">ia</span></div>
-        <p>
-          Modelo de equipo técnico de nueva generación ·{' '}
-          <a
-            href="/deviamodel/assets/devia-presentacion.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: 'var(--blue-light)' }}
-          >
-            Descargar presentación PDF
-          </a>
-        </p>
-      </div>
-    </footer>
-  );
-}
+const TOTAL_SECTIONS = 13;
 
 export default function App() {
-  useScrollReveal();
-  useFullPageScroll();
+  const { currentIndex, goTo } = useFullPageScroll(TOTAL_SECTIONS);
 
   return (
     <>
       <Header />
-      <NavDots />
-      <main>
+      <NavDots currentIndex={currentIndex} goTo={goTo} />
+
+      {/*
+        #sections-wrapper — positioned fixed so it never interacts with
+        the browser scroll engine. We slide it via CSS transform + transition.
+        This is the same technique used by fullpage.js and Linear.app.
+      */}
+      <div
+        id="sections-wrapper"
+        style={{ transform: `translateY(${-currentIndex * 100}vh)` }}
+      >
         <Hero />
         <Problema />
         <Modelo />
@@ -62,8 +50,7 @@ export default function App() {
         <Propuesta />
         <Flujo />
         <CTA />
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

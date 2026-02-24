@@ -1,75 +1,57 @@
-import { useEffect, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 /**
- * Full-page scroll controller.
- * Intercepts wheel, keyboard and touch events and animates
- * the scroll with a custom easing curve — no CSS scroll-snap.
- * Each scroll gesture moves exactly one section.
+ * Full-page scroll controller — CSS transform approach.
+ *
+ * Instead of animating window.scrollY (which fights browser scroll physics
+ * and OS mouse-wheel inertia), we move a fixed wrapper div with
+ * CSS `transform: translateY`. The GPU handles the easing — no rAF loop,
+ * no window.scrollTo, no interference from the OS.
+ *
+ * Returns { currentIndex, goTo } so App can bind them to the wrapper style
+ * and pass them down to NavDots.
  */
 
-function easeInOutCubic(t: number): number {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
+const TRANSITION_MS = 900; // must match CSS transition duration
 
-const DURATION = 950; // ms — tweak for feel
-
-export function useFullPageScroll() {
-  const currentIndex = useRef(0);
+export function useFullPageScroll(totalSections: number) {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const isAnimating = useRef(false);
   const touchStartY = useRef(0);
 
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll('section'));
-    if (!sections.length) return;
-
-    function goTo(index: number) {
-      if (index < 0 || index >= sections.length) return;
+  const goTo = useCallback(
+    (index: number) => {
       if (isAnimating.current) return;
+      if (index < 0 || index >= totalSections) return;
 
       isAnimating.current = true;
-      currentIndex.current = index;
+      setCurrentIndex(index);
 
-      const targetY =
-        sections[index].getBoundingClientRect().top + window.scrollY;
-      const startY = window.scrollY;
-      const distance = targetY - startY;
-      let startTime: number | null = null;
+      // Unlock after CSS transition finishes + small buffer
+      setTimeout(() => {
+        isAnimating.current = false;
+      }, TRANSITION_MS + 100);
+    },
+    [totalSections]
+  );
 
-      function step(ts: number) {
-        if (!startTime) startTime = ts;
-        const elapsed = ts - startTime;
-        const progress = Math.min(elapsed / DURATION, 1);
-
-        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          // Cooldown after animation — prevents wheel inertia from
-          // triggering a second navigation immediately after the first.
-          setTimeout(() => {
-            isAnimating.current = false;
-          }, 350);
-        }
-      }
-
-      requestAnimationFrame(step);
-    }
-
+  useEffect(() => {
     function onWheel(e: WheelEvent) {
       e.preventDefault();
       if (isAnimating.current) return;
-      goTo(currentIndex.current + (e.deltaY > 0 ? 1 : -1));
+      // Read once — deltaY direction is all we need
+      const dir = e.deltaY > 0 ? 1 : -1;
+      goTo(currentIndex + dir);  // stale closure — solved below
     }
 
     function onKeyDown(e: KeyboardEvent) {
       if (isAnimating.current) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      if (['ArrowDown', 'PageDown'].includes(e.key)) {
         e.preventDefault();
-        goTo(currentIndex.current + 1);
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        goTo(currentIndex + 1);
+      } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
         e.preventDefault();
-        goTo(currentIndex.current - 1);
+        goTo(currentIndex - 1);
       }
     }
 
@@ -81,7 +63,7 @@ export function useFullPageScroll() {
       if (isAnimating.current) return;
       const delta = touchStartY.current - e.changedTouches[0].clientY;
       if (Math.abs(delta) < 50) return;
-      goTo(currentIndex.current + (delta > 0 ? 1 : -1));
+      goTo(currentIndex + (delta > 0 ? 1 : -1));
     }
 
     window.addEventListener('wheel', onWheel, { passive: false });
@@ -95,5 +77,8 @@ export function useFullPageScroll() {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
     };
-  }, []);
+    // Re-bind on every index change so closures are always fresh
+  }, [currentIndex, goTo]);
+
+  return { currentIndex, goTo };
 }
