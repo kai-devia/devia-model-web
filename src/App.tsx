@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <>
-      <Header goTo={goTo} />
+      <Header />
       <NavDots currentIndex={currentIndex} goTo={goTo} />
 
       {/*
