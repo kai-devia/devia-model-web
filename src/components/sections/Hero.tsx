@@ -1,15 +1,10 @@
 import { motion } from 'framer-motion';
 import { fadeInUp, defaultViewport } from '../../animations';
-import { IconArrowDown, IconDownload } from '../../icons';
+import { IconDownload } from '../../icons';
 
 const pdfPath = '/deviamodel/assets/devia-presentacion.pdf';
 
 export function Hero() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section id="hero">
       <div className="hero-extra-glow" />
@@ -53,11 +48,7 @@ export function Hero() {
           viewport={defaultViewport}
           transition={{ delay: 0.3 }}
         >
-          <button className="btn-primary" onClick={() => scrollTo('problema')}>
-            Descubrir el modelo
-            <IconArrowDown />
-          </button>
-          <a href={pdfPath} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+          <a href={pdfPath} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <IconDownload />
             Descargar PDF
           </a>
@@ -65,8 +56,8 @@ export function Hero() {
       </div>
 
       <div className="hero-scroll-hint">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <span>Descubre el modelo</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 5v14M5 12l7 7 7-7"/>
         </svg>
       </div>
