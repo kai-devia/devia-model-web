@@ -1,0 +1,549 @@
+/* ── Card ─────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-light);
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+/* ── Compare table ────────────────────────────────────────── */
+.compare-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.compare-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--surface-2);
+}
+
+.compare-header-cell {
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+.compare-header-cell.old {
+  color: var(--red-text);
+  border-right: 1px solid var(--border);
+}
+
+.compare-header-cell.new {
+  color: var(--green-text);
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+
+.compare-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.compare-cell {
+  padding: 14px 20px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.compare-cell.old {
+  background: var(--red-dim);
+  border-right: 1px solid var(--border);
+}
+
+.compare-cell.new {
+  background: var(--green-dim);
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .compare-header {
+    grid-template-columns: 1fr;
+  }
+  .compare-header-cell.old {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+  .compare-cell.old {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* ── Blue banner ──────────────────────────────────────────── */
+.blue-banner {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin-top: 32px;
+}
+
+.blue-banner p {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.blue-banner strong {
+  color: var(--blue-light);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 15, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.header-nav a:hover {
+  color: var(--text);
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue-light);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.header-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.header-btn:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--blue);
+}
+
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+}
+
+/* ── Nav dots ─────────────────────────────────────────────── */
+#nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.nav-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid var(--border);
+  transition: opacity 0.2s;
+}
+
+.nav-dot:hover::after {
+  opacity: 1;
+}
+
+.nav-dot.active {
+  background: var(--blue);
+  transform: scale(1.4);
+}
+
+.nav-dot:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  #nav-dots {
+    display: none;
+  }
+}
+
+/* ── Hero section ────────────────────────────────────────── */
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-extra-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-tagline {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 60%, var(--blue-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  max-width: 640px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+.hero-scroll-hint svg {
+  width: 18px;
+  height: 18px;
+  animation: bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ── General section padding ─────────────────────────────── */
+section:not(#hero) {
+  display: flex;
+  align-items: center;
+  padding: 96px 0;
+}
+
+section:not(#hero) > .container {
+  width: 100%;
+}
+
+/* ── Diagram (Modelo section) ────────────────────────────── */
+.diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 40px;
+}
+
+.diagram-box {
+  border-radius: var(--radius);
+  padding: 16px 32px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.diagram-box.primary {
+  background: var(--blue-dim);
+  border-color: var(--blue);
+  min-width: 280px;
+  color: #fff;
+}
+
+.diagram-box.secondary {
+  background: var(--surface);
+  border-color: rgba(59, 130, 246, 0.3);
+  min-width: 160px;
+}
+
+.diagram-box.tertiary {
+  background: var(--surface-2);
+  border-color: var(--border);
+  min-width: 320px;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.diagram-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.diagram-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 4px 0;
+}
+
+.diagram-arrow svg {
+  width: 18px;
+  height: 18px;
+  color: var(--blue);
+}
+
+.diagram-line {
+  width: 1px;
+  height: 20px;
+  background: var(--blue);
+}
+
+/* ── Engine diagram (Motor section) ──────────────────────── */
+.engine-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.engine-box {
+  border-radius: var(--radius);
+  padding: 24px 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.engine-box.system {
+  background: var(--surface);
+  border-color: rgba(59, 130, 246, 0.4);
+  min-width: 220px;
+}
+
+.engine-box.model {
+  background: var(--surface-2);
+  min-width: 220px;
+}
+
+.engine-swap-note {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.engine-arrow {
+  font-size: 1.8rem;
+  color: var(--blue);
+}
+
+/* ── Steps grid (Flujo section) ──────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+}
+
+.step-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--blue-dim);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.step-card h3 {
+  margin-bottom: 8px;
+}
+
+/* ── CTA section ─────────────────────────────────────────── */
+#cta {
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 680px;
+}
+
+#cta h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.cta-bullets {
+  list-style: none;
+  margin: 24px auto 0;
+  max-width: 480px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cta-bullets li {
+  color: var(--text-muted);
+  padding-left: 20px;
+  position: relative;
+  font-size: 0.97rem;
+}
+
+.cta-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
