@@ -149,6 +149,10 @@
   text-decoration: none;
 }
 
+.header-logo .ia {
+  color: var(--accent);
+}
+
 .header-nav {
   display: flex;
   align-items: center;
