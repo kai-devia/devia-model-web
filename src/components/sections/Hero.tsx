@@ -48,7 +48,7 @@ export function Hero() {
           viewport={defaultViewport}
           transition={{ delay: 0.3 }}
         >
-          <a href={pdfPath} target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <a href={pdfPath} target="_blank" rel="noopener noreferrer" className="btn-secondary">
             <IconDownload />
             Descargar PDF
           </a>
@@ -56,9 +56,14 @@ export function Hero() {
       </div>
 
       <div className="hero-scroll-hint">
-        <span>Descubre el modelo</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
+        {/* Mouse icon */}
+        <svg className="scroll-mouse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="7" y="2" width="10" height="16" rx="5"/>
+          <line x1="12" y1="6" x2="12" y2="10"/>
+        </svg>
+        <span>Scroll para explorar</span>
+        <svg className="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M5 12l7 7 7-7"/>
         </svg>
       </div>
     </section>
