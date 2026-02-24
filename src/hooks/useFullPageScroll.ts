@@ -45,7 +45,11 @@ export function useFullPageScroll() {
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
-          isAnimating.current = false;
+          // Cooldown after animation — prevents wheel inertia from
+          // triggering a second navigation immediately after the first.
+          setTimeout(() => {
+            isAnimating.current = false;
+          }, 350);
         }
       }
 
