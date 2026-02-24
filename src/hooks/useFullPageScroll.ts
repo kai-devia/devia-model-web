@@ -36,6 +36,9 @@ export function useFullPageScroll(totalSections: number) {
   );
 
   useEffect(() => {
+    // On mobile we disable the fullpage engine — CSS handles layout instead
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
     function onWheel(e: WheelEvent) {
       e.preventDefault();
       // Block wheel entirely — synthesize a keyboard arrow event instead.

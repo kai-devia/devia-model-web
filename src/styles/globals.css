@@ -237,3 +237,45 @@ footer p {
 .logo .ia {
   color: var(--blue);
 }
+
+/* ── Mobile: solo Hero ───────────────────────────────────────
+   En móvil desactivamos el fullpage engine:
+   - html/body vuelven a overflow auto
+   - #sections-wrapper pasa a position static (el transform inline se ignora)
+   - Ocultamos todo excepto la primera sección (Hero)
+   - NavDots y scroll hint también se ocultan
+──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  #sections-wrapper {
+    position: static !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  section {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  /* Ocultar todas las secciones excepto la primera */
+  section:not(:first-child) {
+    display: none !important;
+  }
+
+  /* Ocultar NavDots */
+  .nav-dots {
+    display: none !important;
+  }
+
+  /* Ocultar scroll hint */
+  .scroll-hint {
+    display: none !important;
+  }
+}
