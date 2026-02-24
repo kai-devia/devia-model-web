@@ -38,10 +38,11 @@ export function useFullPageScroll(totalSections: number) {
   useEffect(() => {
     function onWheel(e: WheelEvent) {
       e.preventDefault();
-      if (isAnimating.current) return;
-      // Read once — deltaY direction is all we need
-      const dir = e.deltaY > 0 ? 1 : -1;
-      goTo(currentIndex + dir);  // stale closure — solved below
+      // Block wheel entirely — synthesize a keyboard arrow event instead.
+      // This guarantees both input methods use the exact same code path,
+      // including the isAnimating guard and cooldown.
+      const key = e.deltaY > 0 ? 'ArrowDown' : 'ArrowUp';
+      window.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
     }
 
     function onKeyDown(e: KeyboardEvent) {
