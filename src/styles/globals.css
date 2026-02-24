@@ -27,7 +27,8 @@
 
 /* ── Scroll snap ─────────────────────────────────────────── */
 html {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
   overflow-y: scroll;
   height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -42,11 +43,12 @@ body {
 
 section {
   scroll-snap-align: start;
+  scroll-snap-stop: normal;
   min-height: 100vh;
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 section.is-visible {
